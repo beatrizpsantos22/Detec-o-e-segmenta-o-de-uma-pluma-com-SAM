@@ -1,4 +1,4 @@
-´´
+```
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
@@ -108,4 +108,4 @@ plot_config(
     mask_mixed,
     "Configuração 3: Bounding Box + Pontos Positivos e Negativos",
 )
-´´
+```
