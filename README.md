@@ -109,3 +109,15 @@ plot_config(
     "Configuração 3: Bounding Box + Pontos Positivos e Negativos",
 )
 ```
+## Análise dos Resultados e Justificativas
+
+### 1. Avaliação das Máscaras Geradas
+* **Configuração 1 (Bounding Box genérica):** Apenas com a caixa delimitadora, o modelo capturou a região superior mais densa da pluma de fumo, mas deixou de fora a base da queimada e as áreas de menor densidade.
+* **Configuração 2 (Bounding Box + Pontos Positivos):** A inclusão de pontos positivos tentou expandir a segmentação, contudo gerou um "falso positivo" significativo ao incluir regiões de bruma/névoa no céu ao lado esquerdo da imagem, demonstrando a sensibilidade do modelo a tons semelhantes.
+* **Configuração 3 (Bounding Box + Pontos Positivos e Negativos):** A utilização de pontos negativos no céu ao lado esquerdo foi eficaz para restringir a máscara e remover o excesso selecionado na Configuração 2, aproximando a segmentação da verdadeira pluma de fumo.
+
+### 2. Dificuldades Encontradas devido às Características da Imagem
+* **Iluminação e Contraste:** O tom acinzentado e esbranquiçado da fumo no topo confunde-se com a bruma atmosférica do horizonte, tornando os limites da máscara menos precisos em zonas de baixo contraste.
+* **Semelhança entre Fumo e Elementos do Fundo:** A presença de névoa/bruma sobre a vegetação ao fundo possui características de cor e textura muito semelhantes às do fumo difuso, o que faz com que o algoritmo interprete essas áreas como parte do mesmo objeto sem o auxílio de pontos negativos.
+* **Bordas Difusas:** Ao contrário de objetos rígidos, a pluma de fumo possui contornos gradientes e sem bordas definidas, o que dificulta uma delimitação binária perfeita.
+  <img width="1489" height="437" alt="download (1)" src="https://github.com/user-attachments/assets/0702fcca-095b-4e1c-aac0-6616dc60f6e8" />
